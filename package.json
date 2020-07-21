@@ -1,0 +1,10 @@
+{
+	"name": "PPG-Askbot",
+	"version": "1.0.0",
+	"description": "MPO Discord's #askppg assistant",
+	"main": "askppg.js",
+	"author": "PPG Milkglue, PPG JiaLak, PPGA stevo",
+	"dependencies": {
+		"discord.js": "^12.2.0"
+	}
+}
