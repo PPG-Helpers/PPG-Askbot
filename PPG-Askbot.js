@@ -1,8 +1,11 @@
-const fs = require('fs');
-
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
+const askQ = require('./events/askQ.js');
+const sheets = require('./utils/sheetsHandler.js');
+const google = require('googleapis');
+const path = require('path');
+const fs = require('fs');
 const prefix = '!';
 
 // load commands
@@ -13,12 +16,14 @@ for(const file of commandFiles){
 	client.commands.set(command.name, command);
 }
 
+
 // events
 client.on('ready', () => {
-    console.log("Servers:");
-    client.guilds.cache.forEach((guild) => {
-    	console.log("-" + guild.name);
-    });
+	var dayMillseconds = 1000 * 60 * 60 * 24;
+	var dayOfWeek = new Date().getDay();
+	var question = "How are you today?";
+    setInterval(function(){askQ.ask(client, config.askId, question)}, 10000);
+
 });
 
 client.on('message', message => {

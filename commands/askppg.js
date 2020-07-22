@@ -12,5 +12,8 @@ module.exports = {
 
 		message.reply('Thank you for submitting the question: "' + question + '" It has been queued to the question pool!')
 	  	  .catch(console.error);
+	},
+	addQuestionToSheets(){
+
 	}
 }

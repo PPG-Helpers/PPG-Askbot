@@ -5,6 +5,7 @@
 	"main": "PPG-Askbot.js",
 	"author": "PPG Milkglue, PPG JiaLak, PPGA stevo",
 	"dependencies": {
-		"discord.js": "^12.2.0"
+		"discord.js": "^12.2.0",
+		"googleapis": "^55.0.0"
 	}
 }
