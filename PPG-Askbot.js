@@ -1,11 +1,18 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+
 const config = require('./config.json');
 const askQ = require('./events/askQ.js');
 const sheets = require('./utils/sheetsHandler.js');
-const google = require('googleapis');
+
+const {google} = require('googleapis');
+
 const path = require('path');
+const http = require('http');
+const url = require('url');
+const opn = require('open');
 const fs = require('fs');
+const destroyer = require('server-destroy');
 const prefix = '!';
 
 // load commands
@@ -19,11 +26,7 @@ for(const file of commandFiles){
 
 // events
 client.on('ready', () => {
-	var dayMillseconds = 1000 * 60 * 60 * 24;
-	var dayOfWeek = new Date().getDay();
-	var question = "How are you today?";
-    setInterval(function(){askQ.ask(client, config.askId, question)}, 10000);
-
+	sheets.start(client);
 });
 
 client.on('message', message => {
