@@ -23,5 +23,5 @@ Next, make a `config.json` file and add the following with your bot's token repl
 ## Run Code
 For testing, go to your working directory and run the bot with
 ```bash
-node askppg.js
+node PPG-Askbot.js
 ```
