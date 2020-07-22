@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'askppg',
 	description: 'accept question submissions from users',
+	usage: '!askppg',
 	execute(message, client){
 		if(!message.content.match(/^(!askppg)( )*[0-9a-zA-Z_ ?]+[?]$/g)){
 			return;
