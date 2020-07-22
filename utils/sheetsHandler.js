@@ -19,6 +19,9 @@ const authClient = new google.auth.OAuth2(
 	config.redirectURI
 );
 
+const sheetRange = new Date().getDay() == 6?'serious!A1:A1':'general!A1:A1';
+
+
 google.options({auth: authClient});
 
 module.exports = {
@@ -56,12 +59,7 @@ module.exports = {
 	  	});
 	},
 	async readQuestion(auth, client){
-		var sheetRange = 'general!A1:A1';
-		if(new Date().getDay() == 6){
-			sheetRange = 'serious!A1:A1';
-		}
-
-		var question = "";
+		console.log("in read question");
 		sheets.spreadsheets.values.get(
 		{
 			auth: auth,
@@ -73,16 +71,58 @@ module.exports = {
 				askQ.ask(client, config.askId, "Problem with retrieving question of the day");
 				throw error;
 			}
-			question = res.data.values[0];
-			setInterval(function(){askQ.ask(client, config.askId, question)}, 10000);
+			var question = res.data.values[0];
+			// every interval, read, delete, and post
+			askQ.ask(client, config.askId, question);
 		});
+	},
+	async removeQuestion(client){
+		console.log("starting to remove a question");
+		sheets.spreadsheets.values.batchUpdate(
+		{
+			auth: client,
+			spreadsheetId: config.spreadsheetId,
+			range: sheetRange,
+			requestBody:{
+				requests: [{
+					"deleteDimension" : {
+						"range":{
+							"sheetId": spreadsheetId,
+							"dimension": "ROWS",
+							"startIndex": 0,
+							"endIndex": 1
+						}
+					},
+				}],
+			}
+
+		}, (err, res) => {
+			if(err){
+				console.error('Unable to delete');
+				throw error;
+			}
+			console.log("question successfully removed");
+		});
+	},
+	async askingFromSheets(client, discordClient){
+		console.log("in asking from sheets");
+		await this.readQuestion(client, discordClient);
+		await this.removeQuestion(client)
+	},
+	async delay(ms){
+		return await new Promise(resolve => setTimeout(resolve, ms));
 	},
 	async start(discordClient){
 		console.log("starting");
 		var question = "";
 		try {
 			var client = await this.authenticate(scopes);
-			await this.readQuestion(client, discordClient);
+			while(true){
+				await this.delay(10000);
+				await this.askingFromSheets(client, discordClient);
+			}
+			// setInterval(askingFromSheets(client, discordClient), 10000);
+			// delete row!
 		} catch(error){
 			console.error;
 		}

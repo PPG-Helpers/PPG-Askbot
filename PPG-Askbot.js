@@ -25,7 +25,7 @@ for(const file of commandFiles){
 
 
 // events
-client.on('ready', () => {
+client.on('ready', async () => {
 	sheets.start(client);
 });
 
