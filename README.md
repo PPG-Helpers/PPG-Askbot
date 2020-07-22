@@ -19,3 +19,9 @@ Next, make a `config.json` file and add the following with your bot's token repl
 	"permissions-integer": 84992
 }
 ````
+
+## Run Code
+For testing, go to your working directory and run the bot with
+```bash
+node askppg.js
+```
