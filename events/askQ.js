@@ -7,8 +7,5 @@ module.exports = {
 	    		channel.send(question).catch(console.error);
 	    	});
     	});
-	},
-	retrieveQuestion(day){
-
 	}
 }
