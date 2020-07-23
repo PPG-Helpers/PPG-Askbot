@@ -96,7 +96,8 @@ module.exports = {
 					console.log("length is 0");
 					loop = false;
 				} else {
-					question = rows[0];
+					let d = new Date();
+					question = `Question of the day ${d.getMonth() + 1 }/${d.getDate()}/${d.getFullYear()}: ${rows[0]}`;
 				}
 				// every interval, read, delete, and post
 				askQ.ask(client, config.askId, question);

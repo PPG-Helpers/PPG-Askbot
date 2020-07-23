@@ -17,10 +17,9 @@ module.exports = {
 	description: 'accept question submissions from users',
 	usage: '!askppg',
 	execute(message, client){
-		if(!message.content.match(/^(!askppg)( )*[0-9a-zA-Z_ ?]+[?]$/g)){
+		if(!message.content.startsWith("!askppg")){
 			return;
 		}
-
 		// TODO: accept multiple questions, delimited by a ';' symbol
 		var question = message.content.substring("!askppg".length + 1);
 
