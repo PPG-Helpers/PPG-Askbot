@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+require('dotenv').config();
+
 const config = require('./config.json');
 const askQ = require('./events/askQ.js');
 const sheets = require('./utils/sheetsHandler.js');
@@ -51,4 +53,4 @@ client.on('message', message => {
 // https://discordapp.com/developers/applications/
 // Click on your application -> Bot -> Token -> "Click to Reveal Token"
 
-client.login(config.token);
+client.login(process.env.TOKEN);

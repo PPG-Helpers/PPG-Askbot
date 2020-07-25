@@ -1,3 +1,4 @@
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
@@ -14,9 +15,9 @@ const askQ = require('../events/askQ.js');
 const scopes = ['https://www.googleapis.com/auth/spreadsheets'];
 
 const authClient = new google.auth.OAuth2(
-	config.clientId,
-	config.clientSecret,
-	config.redirectURI
+	process.env.CLIENTID,
+	process.env.CLIENTSECRET,
+	process.env.REDIRECTURI
 );
 
 google.options({auth: authClient});
@@ -82,12 +83,12 @@ module.exports = {
 			sheets.spreadsheets.values.get(
 			{
 				auth: auth,
-				spreadsheetId: config.spreadsheetId,
+				spreadsheetId: process.env.SPREADSHEETID,
 				range: sheetRange
 			}, (err, res) => {
 				if(err) { 
 					console.error('API threw an error');
-					askQ.ask(client, config.askId, "Problem with retrieving question of the day");
+					askQ.ask(client, process.env.ASKID, "Problem with retrieving question of the day");
 					throw error;
 				}
 				var rows = res.data.values;
@@ -100,7 +101,7 @@ module.exports = {
 					question = `Question of the day ${d.getMonth() + 1 }/${d.getDate()}/${d.getFullYear()}: ${rows[0]}`;
 				}
 				// every interval, read, delete, and post
-				askQ.ask(client, config.askId, question);
+				askQ.ask(client, process.env.ASKID, question);
 			});
 		}
 	},
@@ -109,7 +110,7 @@ module.exports = {
 		if(loop){
 			sheets.spreadsheets.batchUpdate(
 			{
-				spreadsheetId: config.spreadsheetId,
+				spreadsheetId: process.env.SPREADSHEETID,
 				resource:{
 					requests: [{
 						deleteDimension : {
@@ -136,7 +137,7 @@ module.exports = {
 	async addQuestion(question){
 		console.log("asking question");
 		sheets.spreadsheets.values.append({
-		    spreadsheetId: config.spreadsheetId,
+		    spreadsheetId: process.env.SPREADSHEETID,
 		    range: sheetTag,
 		    valueInputOption: 'USER_ENTERED',
 		    requestBody: {

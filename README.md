@@ -14,23 +14,22 @@ npm install googleapis
 npm install discord.js
 npm install server-destroy
 npm install open
+npm install dotenv
 ```
-Next, make a `config.json` file and add the following with your bot's token replacing the `YOUR_TOKEN_ID` field (put it in between the quotation marks). Also replace `YOUR_ASK_CHANNEL_ID` with the respective ID of the askppg channel, `YOUR_CLIENT_ID`  and `YOUR_API_KEY` with the Client ID and API key you get by following the instructions on this [page](https://github.com/googleapis/google-api-nodejs-client#oauth2-client), and `YOUR_SS_ID` from the google spreadsheets link (the string after /d in the URL), and `YOUR_SECRET` which can be obtained from the [API console](https://console.developers.google.com).
+Next, make a `.env` file and add the following with your bot's token replacing the `YOUR_TOKEN_ID` field (put it in between the quotation marks). Also replace `YOUR_ASK_CHANNEL_ID` with the respective ID of the askppg channel, `YOUR_CLIENT_ID`  and `YOUR_API_KEY` with the Client ID and API key you get by following the instructions on this [page](https://github.com/googleapis/google-api-nodejs-client#oauth2-client), and `YOUR_SS_ID` from the google spreadsheets link (the string after /d in the URL), and `YOUR_SECRET` which can be obtained from the [API console](https://console.developers.google.com).
 
 In your spreadsheet, make two pages. One should be titled `general` and the other should be titled `serious`.
 
 ``` javascript
-{
-	"token": "YOUR_TOKEN_ID",
-	"permInt": 84992,
-	"askId": "YOUR_ASK_CHANNEL_ID",
-	"clientId": "YOUR_CLIENT_ID",
-	"apiKey": "YOUR_API_KEY",
-	"spreadsheetId":"YOUR_SS_ID",
-	"clientSecret":"YOUR_SECRET",
-	"redirectURI":"",
-	"refreshToken":""
-}
+TOKEN=YOUR_TOKEN_ID
+PERMINT=84992
+ASKID=YOUR_ASK_CHANNEL_ID
+CLIENTID=YOUR_CLIENT_ID
+APIKEY=YOUR_API_KEY
+SPREADSHEETID=YOUR_SS_ID
+CLIENTSECRET=YOUR_SECRET
+REDIRECTURI=http://localhost:3000/oauth2callback
+REFRESHTOKEN=
 ````
 
 ## Run Code
