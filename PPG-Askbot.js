@@ -29,6 +29,7 @@ for(const file of commandFiles){
 
 // events
 client.on('ready', async () => {
+	console.log("starting auth process");
 	sheets.start(client);
 });
 
