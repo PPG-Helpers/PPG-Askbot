@@ -175,7 +175,8 @@ module.exports = {
 			loop = true;
 		}
 		while(loop){
-			await this.delay(10000);
+			// 1 second = 1000 ms
+			await this.delay(60 * 60 * 1000);
 			await this.askingFromSheets(client, discordClient);
 		}
 
