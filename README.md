@@ -1,3 +1,4 @@
+## ~On Hiatus~
 # PPG-Askbot
 A bot that helps collect, organize, and ask questions for #askppg
 
@@ -37,3 +38,7 @@ For testing, go to your working directory and run the bot with
 ```bash
 node PPG-Askbot.js
 ```
+
+## Future Plans
+- Use a db instead of Google Sheets
+- Create a frontend web app for admins to have better management and PPGs to view queued questions
